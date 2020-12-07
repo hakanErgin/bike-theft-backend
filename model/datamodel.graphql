@@ -1,0 +1,40 @@
+"""
+@model
+"""
+type Theft {
+  _id: GraphbackObjectID!
+  date: String!
+  location: String!
+  """
+  @oneToMany(field: 'theft')
+  """
+  bikes: [Bike!]
+  comments: String
+  """
+  @oneToOne
+  """
+  owner: User!
+}
+
+"""
+@model
+"""
+type Bike {
+  _id: GraphbackObjectID!
+  description: String
+  """
+  @oneToOne
+  """
+  owner: User!
+}
+
+"""
+@model
+"""
+type User {
+  _id: GraphbackObjectID!
+  name: String!
+  contact: String!
+}
+
+scalar GraphbackObjectID
