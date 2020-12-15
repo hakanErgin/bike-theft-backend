@@ -3,38 +3,16 @@
 """
 type Theft {
   _id: GraphbackObjectID!
-  date: String!
-  location: String!
-  """
-  @oneToMany(field: 'theft')
-  """
-  bikes: [Bike!]
+  region: Region!
   comments: String
-  """
-  @oneToOne
-  """
-  owner: User!
+  photo: String
 }
 
-"""
-@model
-"""
-type Bike {
-  _id: GraphbackObjectID!
-  description: String
-  """
-  @oneToOne
-  """
-  owner: User!
-}
-
-"""
-@model
-"""
-type User {
-  _id: GraphbackObjectID!
-  name: String!
-  contact: String!
+type Region {
+  latitude: Int!
+  longitude: Int!
+  latitudeDelta: Int
+  longitudeDelta: Int
 }
 
 scalar GraphbackObjectID
