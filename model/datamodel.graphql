@@ -9,10 +9,10 @@ type Theft {
 }
 
 type Region {
-  latitude: Int!
-  longitude: Int!
-  latitudeDelta: Int
-  longitudeDelta: Int
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
 }
 
 scalar GraphbackObjectID

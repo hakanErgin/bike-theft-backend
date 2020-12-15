@@ -12,10 +12,10 @@ export type Scalars = {
 };
 
 export type CreateRegionInput = {
-  latitude: Scalars['Int'];
-  longitude: Scalars['Int'];
-  latitudeDelta?: Maybe<Scalars['Int']>;
-  longitudeDelta?: Maybe<Scalars['Int']>;
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+  latitudeDelta?: Maybe<Scalars['Float']>;
+  longitudeDelta?: Maybe<Scalars['Float']>;
 };
 
 export type CreateTheftInput = {
@@ -38,10 +38,10 @@ export type GraphbackObjectIdInput = {
 };
 
 export type MutateRegionInput = {
-  latitude?: Maybe<Scalars['Int']>;
-  longitude?: Maybe<Scalars['Int']>;
-  latitudeDelta?: Maybe<Scalars['Int']>;
-  longitudeDelta?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  latitudeDelta?: Maybe<Scalars['Float']>;
+  longitudeDelta?: Maybe<Scalars['Float']>;
 };
 
 export type MutateTheftInput = {
@@ -103,10 +103,10 @@ export type QueryFindTheftsArgs = {
 
 export type Region = {
   __typename?: 'Region';
-  latitude: Scalars['Int'];
-  longitude: Scalars['Int'];
-  latitudeDelta?: Maybe<Scalars['Int']>;
-  longitudeDelta?: Maybe<Scalars['Int']>;
+  latitude: Scalars['Float'];
+  longitude: Scalars['Float'];
+  latitudeDelta?: Maybe<Scalars['Float']>;
+  longitudeDelta?: Maybe<Scalars['Float']>;
 };
 
 export enum SortDirectionEnum {

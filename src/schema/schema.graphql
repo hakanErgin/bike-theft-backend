@@ -7,10 +7,10 @@ directive @specifiedBy(
 ) on SCALAR
 
 input CreateRegionInput {
-  latitude: Int!
-  longitude: Int!
-  latitudeDelta: Int
-  longitudeDelta: Int
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
 }
 
 input CreateTheftInput {
@@ -34,10 +34,10 @@ input GraphbackObjectIDInput {
 }
 
 input MutateRegionInput {
-  latitude: Int
-  longitude: Int
-  latitudeDelta: Int
-  longitudeDelta: Int
+  latitude: Float
+  longitude: Float
+  latitudeDelta: Float
+  longitudeDelta: Float
 }
 
 input MutateTheftInput {
@@ -69,10 +69,10 @@ type Query {
 }
 
 type Region {
-  latitude: Int!
-  longitude: Int!
-  latitudeDelta: Int
-  longitudeDelta: Int
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
 }
 
 enum SortDirectionEnum {
