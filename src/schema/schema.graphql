@@ -16,8 +16,23 @@ input CreateRegionInput {
 input CreateTheftInput {
   _id: GraphbackObjectID
   region: CreateRegionInput!
+  bike_description: String
+  photos: [String!]
   comments: String
-  photo: String
+  date: GraphbackDate
+}
+
+scalar GraphbackDate
+
+input GraphbackDateInput {
+  ne: GraphbackDate
+  eq: GraphbackDate
+  le: GraphbackDate
+  lt: GraphbackDate
+  ge: GraphbackDate
+  gt: GraphbackDate
+  in: [GraphbackDate!]
+  between: [GraphbackDate!]
 }
 
 scalar GraphbackObjectID
@@ -43,8 +58,10 @@ input MutateRegionInput {
 input MutateTheftInput {
   _id: GraphbackObjectID!
   region: MutateRegionInput
+  bike_description: String
+  photos: String
   comments: String
-  photo: String
+  date: GraphbackDate
 }
 
 type Mutation {
@@ -103,14 +120,18 @@ type Subscription {
 type Theft {
   _id: GraphbackObjectID!
   region: Region!
+  bike_description: String
+  photos: [String!]
   comments: String
-  photo: String
+  date: GraphbackDate
 }
 
 input TheftFilter {
   _id: GraphbackObjectIDInput
+  bike_description: StringInput
+  photos: StringInput
   comments: StringInput
-  photo: StringInput
+  date: GraphbackDateInput
   and: [TheftFilter!]
   or: [TheftFilter!]
   not: TheftFilter
@@ -128,6 +149,8 @@ input TheftSubscriptionFilter {
   or: [TheftSubscriptionFilter!]
   not: TheftSubscriptionFilter
   _id: GraphbackObjectIDInput
+  bike_description: StringInput
+  photos: StringInput
   comments: StringInput
-  photo: StringInput
+  date: GraphbackDateInput
 }

@@ -4,8 +4,10 @@
 type Theft {
   _id: GraphbackObjectID!
   region: Region!
+  bike_description: String
+  photos: [String!]
   comments: String
-  photo: String
+  date: GraphbackDate
 }
 
 type Region {
@@ -16,3 +18,4 @@ type Region {
 }
 
 scalar GraphbackObjectID
+scalar GraphbackDate
