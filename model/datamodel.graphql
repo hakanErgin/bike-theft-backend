@@ -7,7 +7,8 @@ type Theft {
   bike_description: String
   photos: [String!]
   comments: String
-  date: GraphbackDate
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
 }
 
 type Region {
@@ -18,4 +19,4 @@ type Region {
 }
 
 scalar GraphbackObjectID
-scalar GraphbackDate
+scalar GraphbackDateTime

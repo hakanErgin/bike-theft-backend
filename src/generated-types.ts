@@ -8,7 +8,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  GraphbackDate: Date;
+  GraphbackDateTime: Date;
   GraphbackObjectID: string;
 };
 
@@ -25,19 +25,20 @@ export type CreateTheftInput = {
   bike_description?: Maybe<Scalars['String']>;
   photos?: Maybe<Array<Scalars['String']>>;
   comments?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['GraphbackDate']>;
+  date?: Maybe<Scalars['GraphbackDateTime']>;
+  created_at?: Maybe<Scalars['GraphbackDateTime']>;
 };
 
 
-export type GraphbackDateInput = {
-  ne?: Maybe<Scalars['GraphbackDate']>;
-  eq?: Maybe<Scalars['GraphbackDate']>;
-  le?: Maybe<Scalars['GraphbackDate']>;
-  lt?: Maybe<Scalars['GraphbackDate']>;
-  ge?: Maybe<Scalars['GraphbackDate']>;
-  gt?: Maybe<Scalars['GraphbackDate']>;
-  in?: Maybe<Array<Scalars['GraphbackDate']>>;
-  between?: Maybe<Array<Scalars['GraphbackDate']>>;
+export type GraphbackDateTimeInput = {
+  ne?: Maybe<Scalars['GraphbackDateTime']>;
+  eq?: Maybe<Scalars['GraphbackDateTime']>;
+  le?: Maybe<Scalars['GraphbackDateTime']>;
+  lt?: Maybe<Scalars['GraphbackDateTime']>;
+  ge?: Maybe<Scalars['GraphbackDateTime']>;
+  gt?: Maybe<Scalars['GraphbackDateTime']>;
+  in?: Maybe<Array<Scalars['GraphbackDateTime']>>;
+  between?: Maybe<Array<Scalars['GraphbackDateTime']>>;
 };
 
 
@@ -65,7 +66,8 @@ export type MutateTheftInput = {
   bike_description?: Maybe<Scalars['String']>;
   photos?: Maybe<Scalars['String']>;
   comments?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['GraphbackDate']>;
+  date?: Maybe<Scalars['GraphbackDateTime']>;
+  created_at?: Maybe<Scalars['GraphbackDateTime']>;
 };
 
 export type Mutation = {
@@ -174,7 +176,8 @@ export type Theft = {
   bike_description?: Maybe<Scalars['String']>;
   photos?: Maybe<Array<Scalars['String']>>;
   comments?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['GraphbackDate']>;
+  date?: Maybe<Scalars['GraphbackDateTime']>;
+  created_at?: Maybe<Scalars['GraphbackDateTime']>;
 };
 
 export type TheftFilter = {
@@ -182,7 +185,8 @@ export type TheftFilter = {
   bike_description?: Maybe<StringInput>;
   photos?: Maybe<StringInput>;
   comments?: Maybe<StringInput>;
-  date?: Maybe<GraphbackDateInput>;
+  date?: Maybe<GraphbackDateTimeInput>;
+  created_at?: Maybe<GraphbackDateTimeInput>;
   and?: Maybe<Array<TheftFilter>>;
   or?: Maybe<Array<TheftFilter>>;
   not?: Maybe<TheftFilter>;
@@ -204,5 +208,6 @@ export type TheftSubscriptionFilter = {
   bike_description?: Maybe<StringInput>;
   photos?: Maybe<StringInput>;
   comments?: Maybe<StringInput>;
-  date?: Maybe<GraphbackDateInput>;
+  date?: Maybe<GraphbackDateTimeInput>;
+  created_at?: Maybe<GraphbackDateTimeInput>;
 };

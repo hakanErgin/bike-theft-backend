@@ -19,20 +19,21 @@ input CreateTheftInput {
   bike_description: String
   photos: [String!]
   comments: String
-  date: GraphbackDate
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
 }
 
-scalar GraphbackDate
+scalar GraphbackDateTime
 
-input GraphbackDateInput {
-  ne: GraphbackDate
-  eq: GraphbackDate
-  le: GraphbackDate
-  lt: GraphbackDate
-  ge: GraphbackDate
-  gt: GraphbackDate
-  in: [GraphbackDate!]
-  between: [GraphbackDate!]
+input GraphbackDateTimeInput {
+  ne: GraphbackDateTime
+  eq: GraphbackDateTime
+  le: GraphbackDateTime
+  lt: GraphbackDateTime
+  ge: GraphbackDateTime
+  gt: GraphbackDateTime
+  in: [GraphbackDateTime!]
+  between: [GraphbackDateTime!]
 }
 
 scalar GraphbackObjectID
@@ -61,7 +62,8 @@ input MutateTheftInput {
   bike_description: String
   photos: String
   comments: String
-  date: GraphbackDate
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
 }
 
 type Mutation {
@@ -123,7 +125,8 @@ type Theft {
   bike_description: String
   photos: [String!]
   comments: String
-  date: GraphbackDate
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
 }
 
 input TheftFilter {
@@ -131,7 +134,8 @@ input TheftFilter {
   bike_description: StringInput
   photos: StringInput
   comments: StringInput
-  date: GraphbackDateInput
+  date: GraphbackDateTimeInput
+  created_at: GraphbackDateTimeInput
   and: [TheftFilter!]
   or: [TheftFilter!]
   not: TheftFilter
@@ -152,5 +156,6 @@ input TheftSubscriptionFilter {
   bike_description: StringInput
   photos: StringInput
   comments: StringInput
-  date: GraphbackDateInput
+  date: GraphbackDateTimeInput
+  created_at: GraphbackDateTimeInput
 }
