@@ -6,65 +6,34 @@ directive @specifiedBy(
   url: String!
 ) on SCALAR
 
-"""@model"""
-type Bike {
-  _id: GraphbackObjectID!
-  description: String
-
-  """
-  @oneToOne(key: 'ownerId')
-  @oneToOne
-  """
-  owner: User!
-
-  """@manyToOne(field: 'bikes', key: 'theftId')"""
-  theft: Theft
-}
-
-input BikeFilter {
-  _id: GraphbackObjectIDInput
-  description: StringInput
-  ownerId: GraphbackObjectIDInput
-  theftId: GraphbackObjectIDInput
-  and: [BikeFilter!]
-  or: [BikeFilter!]
-  not: BikeFilter
-}
-
-type BikeResultList {
-  items: [Bike]!
-  offset: Int
-  limit: Int
-  count: Int
-}
-
-input BikeSubscriptionFilter {
-  and: [BikeSubscriptionFilter!]
-  or: [BikeSubscriptionFilter!]
-  not: BikeSubscriptionFilter
-  _id: GraphbackObjectIDInput
-  description: StringInput
-}
-
-input CreateBikeInput {
-  _id: GraphbackObjectID
-  description: String
-  ownerId: GraphbackObjectID!
-  theftId: GraphbackObjectID
+input CreateRegionInput {
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
 }
 
 input CreateTheftInput {
   _id: GraphbackObjectID
-  date: String!
-  location: String!
+  region: CreateRegionInput!
+  bike_description: String
+  photos: [String!]
   comments: String
-  ownerId: GraphbackObjectID!
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
 }
 
-input CreateUserInput {
-  _id: GraphbackObjectID
-  name: String!
-  contact: String!
+scalar GraphbackDateTime
+
+input GraphbackDateTimeInput {
+  ne: GraphbackDateTime
+  eq: GraphbackDateTime
+  le: GraphbackDateTime
+  lt: GraphbackDateTime
+  ge: GraphbackDateTime
+  gt: GraphbackDateTime
+  in: [GraphbackDateTime!]
+  between: [GraphbackDateTime!]
 }
 
 scalar GraphbackObjectID
@@ -80,37 +49,27 @@ input GraphbackObjectIDInput {
   between: [GraphbackObjectID!]
 }
 
-input MutateBikeInput {
-  _id: GraphbackObjectID!
-  description: String
-  ownerId: GraphbackObjectID
-  theftId: GraphbackObjectID
+input MutateRegionInput {
+  latitude: Float
+  longitude: Float
+  latitudeDelta: Float
+  longitudeDelta: Float
 }
 
 input MutateTheftInput {
   _id: GraphbackObjectID!
-  date: String
-  location: String
+  region: MutateRegionInput
+  bike_description: String
+  photos: String
   comments: String
-  ownerId: GraphbackObjectID
-}
-
-input MutateUserInput {
-  _id: GraphbackObjectID!
-  name: String
-  contact: String
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
 }
 
 type Mutation {
   createTheft(input: CreateTheftInput!): Theft
   updateTheft(input: MutateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft
-  createBike(input: CreateBikeInput!): Bike
-  updateBike(input: MutateBikeInput!): Bike
-  deleteBike(input: MutateBikeInput!): Bike
-  createUser(input: CreateUserInput!): User
-  updateUser(input: MutateUserInput!): User
-  deleteUser(input: MutateUserInput!): User
 }
 
 input OrderByInput {
@@ -126,10 +85,13 @@ input PageRequest {
 type Query {
   getTheft(id: GraphbackObjectID!): Theft
   findThefts(filter: TheftFilter, page: PageRequest, orderBy: OrderByInput): TheftResultList!
-  getBike(id: GraphbackObjectID!): Bike
-  findBikes(filter: BikeFilter, page: PageRequest, orderBy: OrderByInput): BikeResultList!
-  getUser(id: GraphbackObjectID!): User
-  findUsers(filter: UserFilter, page: PageRequest, orderBy: OrderByInput): UserResultList!
+}
+
+type Region {
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
 }
 
 enum SortDirectionEnum {
@@ -154,40 +116,26 @@ type Subscription {
   newTheft(filter: TheftSubscriptionFilter): Theft!
   updatedTheft(filter: TheftSubscriptionFilter): Theft!
   deletedTheft(filter: TheftSubscriptionFilter): Theft!
-  newBike(filter: BikeSubscriptionFilter): Bike!
-  updatedBike(filter: BikeSubscriptionFilter): Bike!
-  deletedBike(filter: BikeSubscriptionFilter): Bike!
-  newUser(filter: UserSubscriptionFilter): User!
-  updatedUser(filter: UserSubscriptionFilter): User!
-  deletedUser(filter: UserSubscriptionFilter): User!
 }
 
 """@model"""
 type Theft {
   _id: GraphbackObjectID!
-  date: String!
-  location: String!
-
-  """
-  @oneToMany(field: 'theft', key: 'theftId')
-  @oneToMany(field: 'theft')
-  """
-  bikes(filter: BikeFilter): [Bike!]
+  region: Region!
+  bike_description: String
+  photos: [String!]
   comments: String
-
-  """
-  @oneToOne(key: 'ownerId')
-  @oneToOne
-  """
-  owner: User!
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
 }
 
 input TheftFilter {
   _id: GraphbackObjectIDInput
-  date: StringInput
-  location: StringInput
+  bike_description: StringInput
+  photos: StringInput
   comments: StringInput
-  ownerId: GraphbackObjectIDInput
+  date: GraphbackDateTimeInput
+  created_at: GraphbackDateTimeInput
   and: [TheftFilter!]
   or: [TheftFilter!]
   not: TheftFilter
@@ -205,39 +153,9 @@ input TheftSubscriptionFilter {
   or: [TheftSubscriptionFilter!]
   not: TheftSubscriptionFilter
   _id: GraphbackObjectIDInput
-  date: StringInput
-  location: StringInput
+  bike_description: StringInput
+  photos: StringInput
   comments: StringInput
-}
-
-"""@model"""
-type User {
-  _id: GraphbackObjectID!
-  name: String!
-  contact: String!
-}
-
-input UserFilter {
-  _id: GraphbackObjectIDInput
-  name: StringInput
-  contact: StringInput
-  and: [UserFilter!]
-  or: [UserFilter!]
-  not: UserFilter
-}
-
-type UserResultList {
-  items: [User]!
-  offset: Int
-  limit: Int
-  count: Int
-}
-
-input UserSubscriptionFilter {
-  and: [UserSubscriptionFilter!]
-  or: [UserSubscriptionFilter!]
-  not: UserSubscriptionFilter
-  _id: GraphbackObjectIDInput
-  name: StringInput
-  contact: StringInput
+  date: GraphbackDateTimeInput
+  created_at: GraphbackDateTimeInput
 }
