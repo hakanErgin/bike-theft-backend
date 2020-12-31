@@ -21,6 +21,12 @@ input CreateTheftInput {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
+  user: CreateUserInput
+}
+
+input CreateUserInput {
+  google_id: String!
+  id_token: String!
 }
 
 scalar GraphbackDateTime
@@ -64,6 +70,12 @@ input MutateTheftInput {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
+  user: MutateUserInput
+}
+
+input MutateUserInput {
+  google_id: String
+  id_token: String
 }
 
 type Mutation {
@@ -127,6 +139,7 @@ type Theft {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
+  user: User
 }
 
 input TheftFilter {
@@ -158,4 +171,9 @@ input TheftSubscriptionFilter {
   comments: StringInput
   date: GraphbackDateTimeInput
   created_at: GraphbackDateTimeInput
+}
+
+type User {
+  google_id: String!
+  id_token: String!
 }

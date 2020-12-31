@@ -9,6 +9,7 @@ type Theft {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
+  user: User
 }
 
 type Region {
@@ -16,6 +17,11 @@ type Region {
   longitude: Float!
   latitudeDelta: Float
   longitudeDelta: Float
+}
+
+type User {
+  google_id: String!
+  id_token: String!
 }
 
 scalar GraphbackObjectID

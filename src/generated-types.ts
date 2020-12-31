@@ -27,6 +27,12 @@ export type CreateTheftInput = {
   comments?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['GraphbackDateTime']>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  user?: Maybe<CreateUserInput>;
+};
+
+export type CreateUserInput = {
+  google_id: Scalars['String'];
+  id_token: Scalars['String'];
 };
 
 
@@ -68,6 +74,12 @@ export type MutateTheftInput = {
   comments?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['GraphbackDateTime']>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  user?: Maybe<MutateUserInput>;
+};
+
+export type MutateUserInput = {
+  google_id?: Maybe<Scalars['String']>;
+  id_token?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -178,6 +190,7 @@ export type Theft = {
   comments?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['GraphbackDateTime']>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  user?: Maybe<User>;
 };
 
 export type TheftFilter = {
@@ -210,4 +223,10 @@ export type TheftSubscriptionFilter = {
   comments?: Maybe<StringInput>;
   date?: Maybe<GraphbackDateTimeInput>;
   created_at?: Maybe<GraphbackDateTimeInput>;
+};
+
+export type User = {
+  __typename?: 'User';
+  google_id: Scalars['String'];
+  id_token: Scalars['String'];
 };
