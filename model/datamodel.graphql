@@ -19,9 +19,17 @@ type Region {
   longitudeDelta: Float
 }
 
+"""
+@model
+"""
 type User {
+  _id: GraphbackObjectID!
   google_id: String!
   id_token: String!
+  """
+  @oneToMany(field: 'user')
+  """
+  thefts: [Theft]
 }
 
 scalar GraphbackObjectID

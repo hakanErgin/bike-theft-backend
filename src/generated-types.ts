@@ -27,10 +27,11 @@ export type CreateTheftInput = {
   comments?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['GraphbackDateTime']>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
-  user?: Maybe<CreateUserInput>;
+  userId?: Maybe<Scalars['GraphbackObjectID']>;
 };
 
 export type CreateUserInput = {
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
   google_id: Scalars['String'];
   id_token: Scalars['String'];
 };
@@ -74,10 +75,11 @@ export type MutateTheftInput = {
   comments?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['GraphbackDateTime']>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
-  user?: Maybe<MutateUserInput>;
+  userId?: Maybe<Scalars['GraphbackObjectID']>;
 };
 
 export type MutateUserInput = {
+  _id: Scalars['GraphbackObjectID'];
   google_id?: Maybe<Scalars['String']>;
   id_token?: Maybe<Scalars['String']>;
 };
@@ -87,6 +89,9 @@ export type Mutation = {
   createTheft?: Maybe<Theft>;
   updateTheft?: Maybe<Theft>;
   deleteTheft?: Maybe<Theft>;
+  createUser?: Maybe<User>;
+  updateUser?: Maybe<User>;
+  deleteUser?: Maybe<User>;
 };
 
 
@@ -104,6 +109,21 @@ export type MutationDeleteTheftArgs = {
   input: MutateTheftInput;
 };
 
+
+export type MutationCreateUserArgs = {
+  input: CreateUserInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  input: MutateUserInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  input: MutateUserInput;
+};
+
 export type OrderByInput = {
   field: Scalars['String'];
   order?: Maybe<SortDirectionEnum>;
@@ -118,6 +138,8 @@ export type Query = {
   __typename?: 'Query';
   getTheft?: Maybe<Theft>;
   findThefts: TheftResultList;
+  getUser?: Maybe<User>;
+  findUsers: UserResultList;
 };
 
 
@@ -128,6 +150,18 @@ export type QueryGetTheftArgs = {
 
 export type QueryFindTheftsArgs = {
   filter?: Maybe<TheftFilter>;
+  page?: Maybe<PageRequest>;
+  orderBy?: Maybe<OrderByInput>;
+};
+
+
+export type QueryGetUserArgs = {
+  id: Scalars['GraphbackObjectID'];
+};
+
+
+export type QueryFindUsersArgs = {
+  filter?: Maybe<UserFilter>;
   page?: Maybe<PageRequest>;
   orderBy?: Maybe<OrderByInput>;
 };
@@ -163,6 +197,9 @@ export type Subscription = {
   newTheft: Theft;
   updatedTheft: Theft;
   deletedTheft: Theft;
+  newUser: User;
+  updatedUser: User;
+  deletedUser: User;
 };
 
 
@@ -180,6 +217,21 @@ export type SubscriptionDeletedTheftArgs = {
   filter?: Maybe<TheftSubscriptionFilter>;
 };
 
+
+export type SubscriptionNewUserArgs = {
+  filter?: Maybe<UserSubscriptionFilter>;
+};
+
+
+export type SubscriptionUpdatedUserArgs = {
+  filter?: Maybe<UserSubscriptionFilter>;
+};
+
+
+export type SubscriptionDeletedUserArgs = {
+  filter?: Maybe<UserSubscriptionFilter>;
+};
+
 /** @model */
 export type Theft = {
   __typename?: 'Theft';
@@ -190,6 +242,7 @@ export type Theft = {
   comments?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['GraphbackDateTime']>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  /** @manyToOne(field: 'thefts', key: 'userId') */
   user?: Maybe<User>;
 };
 
@@ -200,6 +253,7 @@ export type TheftFilter = {
   comments?: Maybe<StringInput>;
   date?: Maybe<GraphbackDateTimeInput>;
   created_at?: Maybe<GraphbackDateTimeInput>;
+  userId?: Maybe<GraphbackObjectIdInput>;
   and?: Maybe<Array<TheftFilter>>;
   or?: Maybe<Array<TheftFilter>>;
   not?: Maybe<TheftFilter>;
@@ -225,8 +279,47 @@ export type TheftSubscriptionFilter = {
   created_at?: Maybe<GraphbackDateTimeInput>;
 };
 
+/** @model */
 export type User = {
   __typename?: 'User';
+  _id: Scalars['GraphbackObjectID'];
   google_id: Scalars['String'];
   id_token: Scalars['String'];
+  /**
+   * @oneToMany(field: 'user', key: 'userId')
+   * @oneToMany(field: 'user')
+   */
+  thefts?: Maybe<Array<Maybe<Theft>>>;
+};
+
+
+/** @model */
+export type UserTheftsArgs = {
+  filter?: Maybe<TheftFilter>;
+};
+
+export type UserFilter = {
+  _id?: Maybe<GraphbackObjectIdInput>;
+  google_id?: Maybe<StringInput>;
+  id_token?: Maybe<StringInput>;
+  and?: Maybe<Array<UserFilter>>;
+  or?: Maybe<Array<UserFilter>>;
+  not?: Maybe<UserFilter>;
+};
+
+export type UserResultList = {
+  __typename?: 'UserResultList';
+  items: Array<Maybe<User>>;
+  offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  count?: Maybe<Scalars['Int']>;
+};
+
+export type UserSubscriptionFilter = {
+  and?: Maybe<Array<UserSubscriptionFilter>>;
+  or?: Maybe<Array<UserSubscriptionFilter>>;
+  not?: Maybe<UserSubscriptionFilter>;
+  _id?: Maybe<GraphbackObjectIdInput>;
+  google_id?: Maybe<StringInput>;
+  id_token?: Maybe<StringInput>;
 };

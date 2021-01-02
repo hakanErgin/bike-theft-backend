@@ -21,10 +21,11 @@ input CreateTheftInput {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
-  user: CreateUserInput
+  userId: GraphbackObjectID
 }
 
 input CreateUserInput {
+  _id: GraphbackObjectID
   google_id: String!
   id_token: String!
 }
@@ -70,10 +71,11 @@ input MutateTheftInput {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
-  user: MutateUserInput
+  userId: GraphbackObjectID
 }
 
 input MutateUserInput {
+  _id: GraphbackObjectID!
   google_id: String
   id_token: String
 }
@@ -82,6 +84,9 @@ type Mutation {
   createTheft(input: CreateTheftInput!): Theft
   updateTheft(input: MutateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft
+  createUser(input: CreateUserInput!): User
+  updateUser(input: MutateUserInput!): User
+  deleteUser(input: MutateUserInput!): User
 }
 
 input OrderByInput {
@@ -97,6 +102,8 @@ input PageRequest {
 type Query {
   getTheft(id: GraphbackObjectID!): Theft
   findThefts(filter: TheftFilter, page: PageRequest, orderBy: OrderByInput): TheftResultList!
+  getUser(id: GraphbackObjectID!): User
+  findUsers(filter: UserFilter, page: PageRequest, orderBy: OrderByInput): UserResultList!
 }
 
 type Region {
@@ -128,6 +135,9 @@ type Subscription {
   newTheft(filter: TheftSubscriptionFilter): Theft!
   updatedTheft(filter: TheftSubscriptionFilter): Theft!
   deletedTheft(filter: TheftSubscriptionFilter): Theft!
+  newUser(filter: UserSubscriptionFilter): User!
+  updatedUser(filter: UserSubscriptionFilter): User!
+  deletedUser(filter: UserSubscriptionFilter): User!
 }
 
 """@model"""
@@ -139,6 +149,8 @@ type Theft {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
+
+  """@manyToOne(field: 'thefts', key: 'userId')"""
   user: User
 }
 
@@ -149,6 +161,7 @@ input TheftFilter {
   comments: StringInput
   date: GraphbackDateTimeInput
   created_at: GraphbackDateTimeInput
+  userId: GraphbackObjectIDInput
   and: [TheftFilter!]
   or: [TheftFilter!]
   not: TheftFilter
@@ -173,7 +186,40 @@ input TheftSubscriptionFilter {
   created_at: GraphbackDateTimeInput
 }
 
+"""@model"""
 type User {
+  _id: GraphbackObjectID!
   google_id: String!
   id_token: String!
+
+  """
+  @oneToMany(field: 'user', key: 'userId')
+  @oneToMany(field: 'user')
+  """
+  thefts(filter: TheftFilter): [Theft]
+}
+
+input UserFilter {
+  _id: GraphbackObjectIDInput
+  google_id: StringInput
+  id_token: StringInput
+  and: [UserFilter!]
+  or: [UserFilter!]
+  not: UserFilter
+}
+
+type UserResultList {
+  items: [User]!
+  offset: Int
+  limit: Int
+  count: Int
+}
+
+input UserSubscriptionFilter {
+  and: [UserSubscriptionFilter!]
+  or: [UserSubscriptionFilter!]
+  not: UserSubscriptionFilter
+  _id: GraphbackObjectIDInput
+  google_id: StringInput
+  id_token: StringInput
 }
