@@ -15,9 +15,10 @@ export const userResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      console.log(await verify());
+      const result = await verify(args.id_token);
+      console.log(result);
 
-      return { google_id: 2, id_token: 2 };
+      return null;
       // const results = await context.graphback.User.findBy(
       //   { filter },
       //   context,

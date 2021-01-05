@@ -32,7 +32,7 @@ type User {
 }
 
 type Mutation {
-  createUserOrSignIn: User
+  createUserOrSignIn(id_token: String!): User
 }
 
 scalar GraphbackObjectID

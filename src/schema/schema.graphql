@@ -75,7 +75,7 @@ input MutateUserInput {
 }
 
 type Mutation {
-  createUserOrSignIn: User
+  createUserOrSignIn(id_token: String!): User
   createTheft(input: CreateTheftInput!): Theft
   updateTheft(input: MutateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft

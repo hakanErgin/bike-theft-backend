@@ -89,6 +89,11 @@ export type Mutation = {
 };
 
 
+export type MutationCreateUserOrSignInArgs = {
+  id_token: Scalars['String'];
+};
+
+
 export type MutationCreateTheftArgs = {
   input: CreateTheftInput;
 };
