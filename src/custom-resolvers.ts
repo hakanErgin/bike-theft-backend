@@ -14,6 +14,7 @@ export const userResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
+      return { google_id: 2, id_token: 2 };
       // const filter: QueryFilter<UserFilter> = {
       //   title: {
       //     startsWith: '[DRAFT]',
