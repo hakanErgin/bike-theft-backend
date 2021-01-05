@@ -9,7 +9,6 @@ type Theft {
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
-  user: User
 }
 
 type Region {
@@ -20,7 +19,7 @@ type Region {
 }
 
 """
-@model
+@model(create: false)
 """
 type User {
   _id: GraphbackObjectID!
@@ -31,6 +30,10 @@ type User {
   """
   thefts: [Theft]
 }
+
+# type Mutation {
+#   createUser: User
+# }
 
 scalar GraphbackObjectID
 scalar GraphbackDateTime

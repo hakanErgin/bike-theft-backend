@@ -30,12 +30,6 @@ export type CreateTheftInput = {
   userId?: Maybe<Scalars['GraphbackObjectID']>;
 };
 
-export type CreateUserInput = {
-  _id?: Maybe<Scalars['GraphbackObjectID']>;
-  google_id: Scalars['String'];
-  id_token: Scalars['String'];
-};
-
 
 export type GraphbackDateTimeInput = {
   ne?: Maybe<Scalars['GraphbackDateTime']>;
@@ -89,7 +83,6 @@ export type Mutation = {
   createTheft?: Maybe<Theft>;
   updateTheft?: Maybe<Theft>;
   deleteTheft?: Maybe<Theft>;
-  createUser?: Maybe<User>;
   updateUser?: Maybe<User>;
   deleteUser?: Maybe<User>;
 };
@@ -107,11 +100,6 @@ export type MutationUpdateTheftArgs = {
 
 export type MutationDeleteTheftArgs = {
   input: MutateTheftInput;
-};
-
-
-export type MutationCreateUserArgs = {
-  input: CreateUserInput;
 };
 
 
@@ -279,7 +267,7 @@ export type TheftSubscriptionFilter = {
   created_at?: Maybe<GraphbackDateTimeInput>;
 };
 
-/** @model */
+/** @model(create: false) */
 export type User = {
   __typename?: 'User';
   _id: Scalars['GraphbackObjectID'];
@@ -293,7 +281,7 @@ export type User = {
 };
 
 
-/** @model */
+/** @model(create: false) */
 export type UserTheftsArgs = {
   filter?: Maybe<TheftFilter>;
 };
