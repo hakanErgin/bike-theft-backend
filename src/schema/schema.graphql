@@ -75,7 +75,7 @@ input MutateUserInput {
 }
 
 type Mutation {
-  createUser: User
+  createUserOrSignIn: User
   createTheft(input: CreateTheftInput!): Theft
   updateTheft(input: MutateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft

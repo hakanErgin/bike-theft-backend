@@ -80,7 +80,7 @@ export type MutateUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser?: Maybe<User>;
+  createUserOrSignIn?: Maybe<User>;
   createTheft?: Maybe<Theft>;
   updateTheft?: Maybe<Theft>;
   deleteTheft?: Maybe<Theft>;

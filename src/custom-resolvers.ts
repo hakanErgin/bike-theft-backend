@@ -8,18 +8,13 @@ import { User } from './generated-types';
 
 export const userResolvers: IResolvers = {
   Mutation: {
-    createUser: async (
+    createUserOrSignIn: async (
       parent: any,
       args: any,
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
       return { google_id: 2, id_token: 2 };
-      // const filter: QueryFilter<UserFilter> = {
-      //   title: {
-      //     startsWith: '[DRAFT]',
-      //   },
-      // };
       // const results = await context.graphback.User.findBy(
       //   { filter },
       //   context,
