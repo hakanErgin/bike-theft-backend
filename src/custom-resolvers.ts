@@ -5,6 +5,7 @@ import { UserFilter } from './generated-types';
 import { GraphQLContext } from './custom-context';
 import { GraphbackContext, GraphbackCRUDService } from 'graphback';
 import { User } from './generated-types';
+import verify from './auth-verifier';
 
 export const userResolvers: IResolvers = {
   Mutation: {
@@ -14,6 +15,8 @@ export const userResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
+      console.log(await verify());
+
       return { google_id: 2, id_token: 2 };
       // const results = await context.graphback.User.findBy(
       //   { filter },
