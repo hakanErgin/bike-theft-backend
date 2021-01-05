@@ -31,9 +31,9 @@ type User {
   thefts: [Theft]
 }
 
-# type Mutation {
-#   createUser: User
-# }
+type Mutation {
+  createUser: User
+}
 
 scalar GraphbackObjectID
 scalar GraphbackDateTime
