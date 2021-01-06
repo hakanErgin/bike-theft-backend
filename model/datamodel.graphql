@@ -22,9 +22,9 @@ type Region {
 @model(create: false)
 """
 type User {
-  _id: GraphbackObjectID!
+  _id: GraphbackObjectID
   google_id: String!
-  id_token: String!
+  google_name: String!
   """
   @oneToMany(field: 'user')
   """

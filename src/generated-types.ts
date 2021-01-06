@@ -73,9 +73,9 @@ export type MutateTheftInput = {
 };
 
 export type MutateUserInput = {
-  _id: Scalars['GraphbackObjectID'];
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
   google_id?: Maybe<Scalars['String']>;
-  id_token?: Maybe<Scalars['String']>;
+  google_name?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -276,9 +276,9 @@ export type TheftSubscriptionFilter = {
 /** @model(create: false) */
 export type User = {
   __typename?: 'User';
-  _id: Scalars['GraphbackObjectID'];
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
   google_id: Scalars['String'];
-  id_token: Scalars['String'];
+  google_name: Scalars['String'];
   /**
    * @oneToMany(field: 'user', key: 'userId')
    * @oneToMany(field: 'user')
@@ -295,7 +295,7 @@ export type UserTheftsArgs = {
 export type UserFilter = {
   _id?: Maybe<GraphbackObjectIdInput>;
   google_id?: Maybe<StringInput>;
-  id_token?: Maybe<StringInput>;
+  google_name?: Maybe<StringInput>;
   and?: Maybe<Array<UserFilter>>;
   or?: Maybe<Array<UserFilter>>;
   not?: Maybe<UserFilter>;
@@ -315,5 +315,5 @@ export type UserSubscriptionFilter = {
   not?: Maybe<UserSubscriptionFilter>;
   _id?: Maybe<GraphbackObjectIdInput>;
   google_id?: Maybe<StringInput>;
-  id_token?: Maybe<StringInput>;
+  google_name?: Maybe<StringInput>;
 };

@@ -69,9 +69,9 @@ input MutateTheftInput {
 }
 
 input MutateUserInput {
-  _id: GraphbackObjectID!
+  _id: GraphbackObjectID
   google_id: String
-  id_token: String
+  google_name: String
 }
 
 type Mutation {
@@ -182,9 +182,9 @@ input TheftSubscriptionFilter {
 
 """@model(create: false)"""
 type User {
-  _id: GraphbackObjectID!
+  _id: GraphbackObjectID
   google_id: String!
-  id_token: String!
+  google_name: String!
 
   """
   @oneToMany(field: 'user', key: 'userId')
@@ -196,7 +196,7 @@ type User {
 input UserFilter {
   _id: GraphbackObjectIDInput
   google_id: StringInput
-  id_token: StringInput
+  google_name: StringInput
   and: [UserFilter!]
   or: [UserFilter!]
   not: UserFilter
@@ -215,5 +215,5 @@ input UserSubscriptionFilter {
   not: UserSubscriptionFilter
   _id: GraphbackObjectIDInput
   google_id: StringInput
-  id_token: StringInput
+  google_name: StringInput
 }

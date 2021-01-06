@@ -1,19 +1,15 @@
 const { OAuth2Client } = require('google-auth-library');
-const { ID_TOKEN, CLIENT_ID } = process.env;
+const { CLIENT_ID } = process.env;
 
 const client = new OAuth2Client(CLIENT_ID);
 export default async function verify(id_token: any) {
-  try {
-    const ticket = await client.verifyIdToken({
-      idToken: id_token,
-      audience: CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
-    const userid = payload.sub;
-    const username = payload.name;
+  const ticket = await client.verifyIdToken({
+    idToken: id_token,
+    audience: CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  const userid = payload.sub;
+  const username = payload.name;
 
-    return { google_id: userid, google_name: username };
-  } catch {
-    return console.error;
-  }
+  return { google_id: userid, google_name: username };
 }

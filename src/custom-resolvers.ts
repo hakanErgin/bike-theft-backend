@@ -15,16 +15,26 @@ export const userResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const result = await verify(args.id_token);
-      console.log(result);
-
-      return null;
-      // const results = await context.graphback.User.findBy(
-      //   { filter },
-      //   context,
-      //   info
-      // );
-      // return results.items;
+      const userVerifiedByToken = await verify(args.id_token).catch(
+        console.error
+      );
+      if (userVerifiedByToken) {
+        const { google_id, google_name } = userVerifiedByToken;
+        const userInDb = await context.graphback.User.findOne(
+          { google_id },
+          context,
+          info
+        ).catch((err) => console.log({ err }));
+        console.log({ userInDb });
+        if (!userInDb) {
+          console.log('attempting to create user');
+          await context.graphback.User.create(
+            { google_id, google_name },
+            context,
+            info
+          ).then((res) => console.log('result of create user', { res }));
+        }
+      }
     },
   },
 };
