@@ -31,6 +31,7 @@ export const userResolvers: IResolvers = {
           ).then((res) => console.log('result of create user', { res }));
         }
       }
+      return userVerifiedByToken;
     },
   },
 };
