@@ -1,14 +1,15 @@
 """
-@model
+@model(create: false)
 """
 type Theft {
-  _id: GraphbackObjectID!
+  _id: GraphbackObjectID
   region: Region!
   bike_description: String
   photos: [String!]
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
+  userId: GraphbackObjectID
 }
 
 type Region {
@@ -23,8 +24,8 @@ type Region {
 """
 type User {
   _id: GraphbackObjectID
-  google_id: String!
-  google_name: String!
+  google_id: String
+  google_name: String
   """
   @oneToMany(field: 'user')
   """
@@ -33,6 +34,25 @@ type User {
 
 type Mutation {
   createUserOrSignIn(id_token: String!): User
+  createTheft(id_token: String!, input: CreateTheftInput!): Theft
+}
+
+input CreateRegionInput {
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
+}
+
+input CreateTheftInput {
+  _id: GraphbackObjectID
+  region: CreateRegionInput!
+  bike_description: String
+  photos: [String!]
+  comments: String
+  date: GraphbackDateTime
+  created_at: GraphbackDateTime
+  userId: GraphbackObjectID
 }
 
 scalar GraphbackObjectID

@@ -62,7 +62,7 @@ export type MutateRegionInput = {
 };
 
 export type MutateTheftInput = {
-  _id: Scalars['GraphbackObjectID'];
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
   region?: Maybe<MutateRegionInput>;
   bike_description?: Maybe<Scalars['String']>;
   photos?: Maybe<Scalars['String']>;
@@ -95,6 +95,7 @@ export type MutationCreateUserOrSignInArgs = {
 
 
 export type MutationCreateTheftArgs = {
+  id_token: Scalars['String'];
   input: CreateTheftInput;
 };
 
@@ -226,16 +227,17 @@ export type SubscriptionDeletedUserArgs = {
   filter?: Maybe<UserSubscriptionFilter>;
 };
 
-/** @model */
+/** @model(create: false) */
 export type Theft = {
   __typename?: 'Theft';
-  _id: Scalars['GraphbackObjectID'];
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
   region: Region;
   bike_description?: Maybe<Scalars['String']>;
   photos?: Maybe<Array<Scalars['String']>>;
   comments?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['GraphbackDateTime']>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  userId?: Maybe<Scalars['GraphbackObjectID']>;
   /** @manyToOne(field: 'thefts', key: 'userId') */
   user?: Maybe<User>;
 };
@@ -271,14 +273,15 @@ export type TheftSubscriptionFilter = {
   comments?: Maybe<StringInput>;
   date?: Maybe<GraphbackDateTimeInput>;
   created_at?: Maybe<GraphbackDateTimeInput>;
+  userId?: Maybe<GraphbackObjectIdInput>;
 };
 
 /** @model(create: false) */
 export type User = {
   __typename?: 'User';
   _id?: Maybe<Scalars['GraphbackObjectID']>;
-  google_id: Scalars['String'];
-  google_name: Scalars['String'];
+  google_id?: Maybe<Scalars['String']>;
+  google_name?: Maybe<Scalars['String']>;
   /**
    * @oneToMany(field: 'user', key: 'userId')
    * @oneToMany(field: 'user')
