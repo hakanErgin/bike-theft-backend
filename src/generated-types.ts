@@ -131,10 +131,16 @@ export type PageRequest = {
 
 export type Query = {
   __typename?: 'Query';
+  getUsersReportedThefts?: Maybe<Array<Maybe<Theft>>>;
   getTheft?: Maybe<Theft>;
   findThefts: TheftResultList;
   getUser?: Maybe<User>;
   findUsers: UserResultList;
+};
+
+
+export type QueryGetUsersReportedTheftsArgs = {
+  id_token: Scalars['String'];
 };
 
 
