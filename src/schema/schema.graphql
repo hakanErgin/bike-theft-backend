@@ -58,7 +58,7 @@ input MutateRegionInput {
 }
 
 input MutateTheftInput {
-  _id: GraphbackObjectID!
+  _id: GraphbackObjectID
   region: MutateRegionInput
   bike_description: String
   photos: String
@@ -76,7 +76,7 @@ input MutateUserInput {
 
 type Mutation {
   createUserOrSignIn(id_token: String!): User
-  createTheft(input: CreateTheftInput!): Theft
+  createTheft(id_token: String!, input: CreateTheftInput!): Theft
   updateTheft(input: MutateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft
   updateUser(input: MutateUserInput!): User
@@ -134,15 +134,16 @@ type Subscription {
   deletedUser(filter: UserSubscriptionFilter): User!
 }
 
-"""@model"""
+"""@model(create: false)"""
 type Theft {
-  _id: GraphbackObjectID!
+  _id: GraphbackObjectID
   region: Region!
   bike_description: String
   photos: [String!]
   comments: String
   date: GraphbackDateTime
   created_at: GraphbackDateTime
+  userId: GraphbackObjectID
 
   """@manyToOne(field: 'thefts', key: 'userId')"""
   user: User
@@ -178,13 +179,14 @@ input TheftSubscriptionFilter {
   comments: StringInput
   date: GraphbackDateTimeInput
   created_at: GraphbackDateTimeInput
+  userId: GraphbackObjectIDInput
 }
 
 """@model(create: false)"""
 type User {
   _id: GraphbackObjectID
-  google_id: String!
-  google_name: String!
+  google_id: String
+  google_name: String
 
   """
   @oneToMany(field: 'user', key: 'userId')
