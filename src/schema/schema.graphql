@@ -94,6 +94,7 @@ input PageRequest {
 }
 
 type Query {
+  getUsersReportedThefts(id_token: String!): [Theft]
   getTheft(id: GraphbackObjectID!): Theft
   findThefts(filter: TheftFilter, page: PageRequest, orderBy: OrderByInput): TheftResultList!
   getUser(id: GraphbackObjectID!): User

@@ -37,6 +37,10 @@ type Mutation {
   createTheft(id_token: String!, input: CreateTheftInput!): Theft
 }
 
+type Query {
+  getUsersReportedThefts(id_token: String!): [Theft]
+}
+
 input CreateRegionInput {
   latitude: Float!
   longitude: Float!
