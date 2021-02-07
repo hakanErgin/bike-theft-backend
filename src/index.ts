@@ -11,6 +11,7 @@ import { connectDB } from './db';
 import { customResolvers } from './custom-resolvers';
 
 async function start() {
+  const port = process.env.PORT;
   const app = express();
 
   app.use(cors());
@@ -46,8 +47,8 @@ async function start() {
   const httpServer = http.createServer(app);
   apolloServer.installSubscriptionHandlers(httpServer);
 
-  httpServer.listen({ port: 4000 }, () => {
-    console.log(`🚀  Server ready at http://localhost:4000/graphql`);
+  httpServer.listen({ port }, () => {
+    console.log(`🚀  Server ready at http://localhost:${port}/graphql`);
   });
 }
 
