@@ -1,24 +1,35 @@
+# types
 """
 @model(create: false)
 """
 type Theft {
   _id: GraphbackObjectID
   region: Region!
-  bike_description: String
-  photos: [String!]
+  bike: Bike
   comments: String
-  date: GraphbackDateTime
+  date_time: DateTime
   created_at: GraphbackDateTime
   userId: GraphbackObjectID
 }
-
 type Region {
   latitude: Float!
   longitude: Float!
   latitudeDelta: Float
   longitudeDelta: Float
 }
-
+type Bike {
+  type: String
+  brand: String
+  color: String
+  year: String
+  frame_size: String
+  wheel_size: String
+  photos: [String]
+}
+type DateTime {
+  date: GraphbackDateTime
+  time: String
+}
 """
 @model(create: false)
 """
@@ -31,33 +42,44 @@ type User {
   """
   thefts: [Theft]
 }
-
 type Mutation {
   createUserOrSignIn(id_token: String!): User
   createTheft(id_token: String!, input: CreateTheftInput!): Theft
 }
-
 type Query {
   getUsersReportedThefts(id_token: String!): [Theft]
 }
 
-input CreateRegionInput {
+# inputs
+input RegionInput {
   latitude: Float!
   longitude: Float!
   latitudeDelta: Float
   longitudeDelta: Float
 }
-
+input BikeInput {
+  type: String
+  brand: String
+  color: String
+  year: String
+  frame_size: String
+  wheel_size: String
+  photos: [String]
+}
+input DateTimeInput {
+  date: GraphbackDateTime
+  time: String
+}
 input CreateTheftInput {
   _id: GraphbackObjectID
-  region: CreateRegionInput!
-  bike_description: String
-  photos: [String!]
+  region: RegionInput!
+  bike: BikeInput
   comments: String
-  date: GraphbackDateTime
+  date_time: DateTimeInput
   created_at: GraphbackDateTime
   userId: GraphbackObjectID
 }
 
+# scalars
 scalar GraphbackObjectID
 scalar GraphbackDateTime

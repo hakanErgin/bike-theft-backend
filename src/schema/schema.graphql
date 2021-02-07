@@ -6,22 +6,44 @@ directive @specifiedBy(
   url: String!
 ) on SCALAR
 
-input CreateRegionInput {
-  latitude: Float!
-  longitude: Float!
-  latitudeDelta: Float
-  longitudeDelta: Float
+type Bike {
+  type: String
+  brand: String
+  color: String
+  year: String
+  frame_size: String
+  wheel_size: String
+  photos: [String]
+}
+
+input BikeInput {
+  type: String
+  brand: String
+  color: String
+  year: String
+  frame_size: String
+  wheel_size: String
+  photos: [String]
 }
 
 input CreateTheftInput {
   _id: GraphbackObjectID
-  region: CreateRegionInput!
-  bike_description: String
-  photos: [String!]
+  region: RegionInput!
+  bike: BikeInput
   comments: String
-  date: GraphbackDateTime
+  date_time: DateTimeInput
   created_at: GraphbackDateTime
   userId: GraphbackObjectID
+}
+
+type DateTime {
+  date: GraphbackDateTime
+  time: String
+}
+
+input DateTimeInput {
+  date: GraphbackDateTime
+  time: String
 }
 
 scalar GraphbackDateTime
@@ -50,6 +72,21 @@ input GraphbackObjectIDInput {
   between: [GraphbackObjectID!]
 }
 
+input MutateBikeInput {
+  type: String
+  brand: String
+  color: String
+  year: String
+  frame_size: String
+  wheel_size: String
+  photos: [String]
+}
+
+input MutateDateTimeInput {
+  date: GraphbackDateTime
+  time: String
+}
+
 input MutateRegionInput {
   latitude: Float
   longitude: Float
@@ -60,10 +97,9 @@ input MutateRegionInput {
 input MutateTheftInput {
   _id: GraphbackObjectID
   region: MutateRegionInput
-  bike_description: String
-  photos: String
+  bike: MutateBikeInput
   comments: String
-  date: GraphbackDateTime
+  date_time: MutateDateTimeInput
   created_at: GraphbackDateTime
   userId: GraphbackObjectID
 }
@@ -108,6 +144,13 @@ type Region {
   longitudeDelta: Float
 }
 
+input RegionInput {
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
+}
+
 enum SortDirectionEnum {
   DESC
   ASC
@@ -139,10 +182,9 @@ type Subscription {
 type Theft {
   _id: GraphbackObjectID
   region: Region!
-  bike_description: String
-  photos: [String!]
+  bike: Bike
   comments: String
-  date: GraphbackDateTime
+  date_time: DateTime
   created_at: GraphbackDateTime
   userId: GraphbackObjectID
 
@@ -152,10 +194,7 @@ type Theft {
 
 input TheftFilter {
   _id: GraphbackObjectIDInput
-  bike_description: StringInput
-  photos: StringInput
   comments: StringInput
-  date: GraphbackDateTimeInput
   created_at: GraphbackDateTimeInput
   userId: GraphbackObjectIDInput
   and: [TheftFilter!]
@@ -175,10 +214,7 @@ input TheftSubscriptionFilter {
   or: [TheftSubscriptionFilter!]
   not: TheftSubscriptionFilter
   _id: GraphbackObjectIDInput
-  bike_description: StringInput
-  photos: StringInput
   comments: StringInput
-  date: GraphbackDateTimeInput
   created_at: GraphbackDateTimeInput
   userId: GraphbackObjectIDInput
 }

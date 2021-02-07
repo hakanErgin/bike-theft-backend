@@ -1,9 +1,7 @@
-import { QueryFilter } from 'graphback';
 import { GraphQLResolveInfo } from 'graphql';
 import { IResolvers } from 'apollo-server-express';
 import { GraphQLContext } from './custom-context';
 import verify from './auth-verifier';
-import { TheftFilter } from './generated-types';
 
 export const customResolvers: IResolvers = {
   Mutation: {
@@ -94,7 +92,6 @@ export const customResolvers: IResolvers = {
             context,
             info
           );
-          console.log(usersReports.items);
           return usersReports.items;
         } else return;
       } else return;
