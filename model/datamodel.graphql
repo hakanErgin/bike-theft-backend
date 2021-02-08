@@ -1,6 +1,6 @@
 # types
 """
-@model(create: false)
+@model
 """
 type Theft {
   _id: GraphbackObjectID
@@ -31,7 +31,7 @@ type DateTime {
   time: String
 }
 """
-@model(create: false)
+@model(find:false, findOne:false)
 """
 type User {
   _id: GraphbackObjectID
@@ -45,6 +45,11 @@ type User {
 type Mutation {
   createUserOrSignIn(id_token: String!): User
   createTheft(id_token: String!, input: CreateTheftInput!): Theft
+  deleteTheft(
+    id_token: String!
+    theftId: GraphbackObjectID!
+    theftUserId: GraphbackObjectID!
+  ): Theft
 }
 type Query {
   getUsersReportedThefts(id_token: String!): [Theft]

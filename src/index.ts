@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('dotenv').config();
 import { ApolloServer } from 'apollo-server-express';
 import { buildGraphbackAPI } from 'graphback';
@@ -10,8 +9,9 @@ import { loadConfigSync } from 'graphql-config';
 import { connectDB } from './db';
 import { customResolvers } from './custom-resolvers';
 
+const port = process.env.PORT;
+
 async function start() {
-  const port = process.env.PORT;
   const app = express();
 
   app.use(cors());
@@ -34,6 +34,14 @@ async function start() {
 
   const { typeDefs, resolvers, contextCreator } = buildGraphbackAPI(modelDefs, {
     dataProviderCreator: createMongoDbProvider(db),
+    crud: {
+      create: false,
+      update: false,
+      delete: false,
+      subCreate: false,
+      subDelete: false,
+      subUpdate: false,
+    },
   });
 
   const apolloServer = new ApolloServer({

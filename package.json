@@ -12,6 +12,7 @@
   },
   "license": "Apache 2.0",
   "dependencies": {
+    "@google-cloud/secret-manager": "^3.4.0",
     "@graphback/runtime-mongo": "1.0.1",
     "apollo-server-express": "2.19.0",
     "cors": "2.8.5",
