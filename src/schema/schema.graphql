@@ -16,7 +16,7 @@ type Bike {
   photos: [String]
 }
 
-input BikeInput {
+input CreateBikeInput {
   type: String
   brand: String
   color: String
@@ -26,22 +26,35 @@ input BikeInput {
   photos: [String]
 }
 
-input CreateTheftInput {
-  _id: GraphbackObjectID
-  region: RegionInput!
-  bike: BikeInput
-  comments: String
-  date_time: DateTimeInput
-  created_at: GraphbackDateTime
-  userId: GraphbackObjectID
-}
-
-type DateTime {
+input CreateDateTimeInput {
   date: GraphbackDateTime
   time: String
 }
 
-input DateTimeInput {
+input CreateRegionInput {
+  latitude: Float!
+  longitude: Float!
+  latitudeDelta: Float
+  longitudeDelta: Float
+}
+
+input CreateTheftInput {
+  _id: GraphbackObjectID
+  region: CreateRegionInput!
+  bike: CreateBikeInput
+  comments: String
+  date_time: CreateDateTimeInput
+  created_at: GraphbackDateTime
+  userId: GraphbackObjectID
+}
+
+input CreateUserInput {
+  _id: GraphbackObjectID
+  google_id: String
+  google_name: String
+}
+
+type DateTime {
   date: GraphbackDateTime
   time: String
 }
@@ -112,11 +125,11 @@ input MutateUserInput {
 
 type Mutation {
   createUserOrSignIn(id_token: String!): User
-  createTheft(id_token: String!, input: CreateTheftInput!): Theft
+  createTheft(input: CreateTheftInput!): Theft
   updateTheft(input: MutateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft
+  createUser(input: CreateUserInput!): User
   updateUser(input: MutateUserInput!): User
-  deleteUser(input: MutateUserInput!): User
 }
 
 input OrderByInput {
@@ -133,18 +146,9 @@ type Query {
   getUsersReportedThefts(id_token: String!): [Theft]
   getTheft(id: GraphbackObjectID!): Theft
   findThefts(filter: TheftFilter, page: PageRequest, orderBy: OrderByInput): TheftResultList!
-  getUser(id: GraphbackObjectID!): User
-  findUsers(filter: UserFilter, page: PageRequest, orderBy: OrderByInput): UserResultList!
 }
 
 type Region {
-  latitude: Float!
-  longitude: Float!
-  latitudeDelta: Float
-  longitudeDelta: Float
-}
-
-input RegionInput {
   latitude: Float!
   longitude: Float!
   latitudeDelta: Float
@@ -178,7 +182,7 @@ type Subscription {
   deletedUser(filter: UserSubscriptionFilter): User!
 }
 
-"""@model(create: false)"""
+"""@model"""
 type Theft {
   _id: GraphbackObjectID
   region: Region!
@@ -219,7 +223,7 @@ input TheftSubscriptionFilter {
   userId: GraphbackObjectIDInput
 }
 
-"""@model(create: false)"""
+"""@model(delete:false, find:false, findOne:false)"""
 type User {
   _id: GraphbackObjectID
   google_id: String
@@ -230,22 +234,6 @@ type User {
   @oneToMany(field: 'user')
   """
   thefts(filter: TheftFilter): [Theft]
-}
-
-input UserFilter {
-  _id: GraphbackObjectIDInput
-  google_id: StringInput
-  google_name: StringInput
-  and: [UserFilter!]
-  or: [UserFilter!]
-  not: UserFilter
-}
-
-type UserResultList {
-  items: [User]!
-  offset: Int
-  limit: Int
-  count: Int
 }
 
 input UserSubscriptionFilter {

@@ -34,6 +34,13 @@ async function start() {
 
   const { typeDefs, resolvers, contextCreator } = buildGraphbackAPI(modelDefs, {
     dataProviderCreator: createMongoDbProvider(db),
+    crud: {
+      create: false,
+      update: false,
+      subCreate: false,
+      subDelete: false,
+      subUpdate: false,
+    },
   });
 
   const apolloServer = new ApolloServer({

@@ -1,6 +1,6 @@
 # types
 """
-@model(create: false)
+@model
 """
 type Theft {
   _id: GraphbackObjectID
@@ -31,7 +31,7 @@ type DateTime {
   time: String
 }
 """
-@model(create: false)
+@model(delete:false, find:false, findOne:false)
 """
 type User {
   _id: GraphbackObjectID
