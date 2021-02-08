@@ -37,6 +37,7 @@ async function start() {
     crud: {
       create: false,
       update: false,
+      delete: false,
       subCreate: false,
       subDelete: false,
       subUpdate: false,

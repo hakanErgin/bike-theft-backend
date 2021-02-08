@@ -126,10 +126,11 @@ input MutateUserInput {
 type Mutation {
   createUserOrSignIn(id_token: String!): User
   createTheft(input: CreateTheftInput!): Theft
-  updateTheft(input: MutateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft
+  updateTheft(input: MutateTheftInput!): Theft
   createUser(input: CreateUserInput!): User
   updateUser(input: MutateUserInput!): User
+  deleteUser(input: MutateUserInput!): User
 }
 
 input OrderByInput {
@@ -223,7 +224,7 @@ input TheftSubscriptionFilter {
   userId: GraphbackObjectIDInput
 }
 
-"""@model(delete:false, find:false, findOne:false)"""
+"""@model(find:false, findOne:false)"""
 type User {
   _id: GraphbackObjectID
   google_id: String

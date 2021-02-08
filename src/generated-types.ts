@@ -133,10 +133,11 @@ export type Mutation = {
   __typename?: 'Mutation';
   createUserOrSignIn?: Maybe<User>;
   createTheft?: Maybe<Theft>;
-  updateTheft?: Maybe<Theft>;
   deleteTheft?: Maybe<Theft>;
+  updateTheft?: Maybe<Theft>;
   createUser?: Maybe<User>;
   updateUser?: Maybe<User>;
+  deleteUser?: Maybe<User>;
 };
 
 
@@ -150,12 +151,12 @@ export type MutationCreateTheftArgs = {
 };
 
 
-export type MutationUpdateTheftArgs = {
+export type MutationDeleteTheftArgs = {
   input: MutateTheftInput;
 };
 
 
-export type MutationDeleteTheftArgs = {
+export type MutationUpdateTheftArgs = {
   input: MutateTheftInput;
 };
 
@@ -166,6 +167,11 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdateUserArgs = {
+  input: MutateUserInput;
+};
+
+
+export type MutationDeleteUserArgs = {
   input: MutateUserInput;
 };
 
@@ -311,7 +317,7 @@ export type TheftSubscriptionFilter = {
   userId?: Maybe<GraphbackObjectIdInput>;
 };
 
-/** @model(delete:false, find:false, findOne:false) */
+/** @model(find:false, findOne:false) */
 export type User = {
   __typename?: 'User';
   _id?: Maybe<Scalars['GraphbackObjectID']>;
@@ -325,7 +331,7 @@ export type User = {
 };
 
 
-/** @model(delete:false, find:false, findOne:false) */
+/** @model(find:false, findOne:false) */
 export type UserTheftsArgs = {
   filter?: Maybe<TheftFilter>;
 };
