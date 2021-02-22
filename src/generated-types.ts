@@ -38,6 +38,13 @@ export type CreateDateTimeInput = {
   time?: Maybe<Scalars['String']>;
 };
 
+export type CreateFeedbackInput = {
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
+  created_at: Scalars['GraphbackDateTime'];
+  type: Scalars['String'];
+  description: Scalars['String'];
+};
+
 export type CreateRegionInput = {
   latitude: Scalars['Float'];
   longitude: Scalars['Float'];
@@ -65,6 +72,25 @@ export type DateTime = {
   __typename?: 'DateTime';
   date?: Maybe<Scalars['GraphbackDateTime']>;
   time?: Maybe<Scalars['String']>;
+};
+
+/** @model(find:false, findOne:false) */
+export type Feedback = {
+  __typename?: 'Feedback';
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
+  created_at: Scalars['GraphbackDateTime'];
+  type: Scalars['String'];
+  description: Scalars['String'];
+};
+
+export type FeedbackSubscriptionFilter = {
+  and?: Maybe<Array<FeedbackSubscriptionFilter>>;
+  or?: Maybe<Array<FeedbackSubscriptionFilter>>;
+  not?: Maybe<FeedbackSubscriptionFilter>;
+  _id?: Maybe<GraphbackObjectIdInput>;
+  created_at?: Maybe<GraphbackDateTimeInput>;
+  type?: Maybe<StringInput>;
+  description?: Maybe<StringInput>;
 };
 
 
@@ -106,6 +132,13 @@ export type MutateDateTimeInput = {
   time?: Maybe<Scalars['String']>;
 };
 
+export type MutateFeedbackInput = {
+  _id?: Maybe<Scalars['GraphbackObjectID']>;
+  created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  type?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
 export type MutateRegionInput = {
   latitude?: Maybe<Scalars['Float']>;
   longitude?: Maybe<Scalars['Float']>;
@@ -134,7 +167,10 @@ export type Mutation = {
   createUserOrSignIn?: Maybe<User>;
   createTheft?: Maybe<Theft>;
   deleteTheft?: Maybe<Theft>;
+  createFeedback?: Maybe<Feedback>;
   updateTheft?: Maybe<Theft>;
+  updateFeedback?: Maybe<Feedback>;
+  deleteFeedback?: Maybe<Feedback>;
   createUser?: Maybe<User>;
   updateUser?: Maybe<User>;
   deleteUser?: Maybe<User>;
@@ -156,8 +192,23 @@ export type MutationDeleteTheftArgs = {
 };
 
 
+export type MutationCreateFeedbackArgs = {
+  input: CreateFeedbackInput;
+};
+
+
 export type MutationUpdateTheftArgs = {
   input: MutateTheftInput;
+};
+
+
+export type MutationUpdateFeedbackArgs = {
+  input: MutateFeedbackInput;
+};
+
+
+export type MutationDeleteFeedbackArgs = {
+  input: MutateFeedbackInput;
 };
 
 
@@ -240,6 +291,9 @@ export type Subscription = {
   newTheft: Theft;
   updatedTheft: Theft;
   deletedTheft: Theft;
+  newFeedback: Feedback;
+  updatedFeedback: Feedback;
+  deletedFeedback: Feedback;
   newUser: User;
   updatedUser: User;
   deletedUser: User;
@@ -258,6 +312,21 @@ export type SubscriptionUpdatedTheftArgs = {
 
 export type SubscriptionDeletedTheftArgs = {
   filter?: Maybe<TheftSubscriptionFilter>;
+};
+
+
+export type SubscriptionNewFeedbackArgs = {
+  filter?: Maybe<FeedbackSubscriptionFilter>;
+};
+
+
+export type SubscriptionUpdatedFeedbackArgs = {
+  filter?: Maybe<FeedbackSubscriptionFilter>;
+};
+
+
+export type SubscriptionDeletedFeedbackArgs = {
+  filter?: Maybe<FeedbackSubscriptionFilter>;
 };
 
 

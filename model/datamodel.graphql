@@ -33,6 +33,15 @@ type DateTime {
 """
 @model(find:false, findOne:false)
 """
+type Feedback {
+  _id: GraphbackObjectID
+  created_at: GraphbackDateTime!
+  type: String!
+  description: String!
+}
+"""
+@model(find:false, findOne:false)
+"""
 type User {
   _id: GraphbackObjectID
   google_id: String
@@ -50,6 +59,7 @@ type Mutation {
     theftId: GraphbackObjectID!
     theftUserId: GraphbackObjectID!
   ): Theft
+  createFeedback(type: String!, description: String!): Feedback
 }
 type Query {
   getUsersReportedThefts(id_token: String!): [Theft]

@@ -31,6 +31,13 @@ input CreateDateTimeInput {
   time: String
 }
 
+input CreateFeedbackInput {
+  _id: GraphbackObjectID
+  created_at: GraphbackDateTime!
+  type: String!
+  description: String!
+}
+
 input CreateRegionInput {
   latitude: Float!
   longitude: Float!
@@ -57,6 +64,24 @@ input CreateUserInput {
 type DateTime {
   date: GraphbackDateTime
   time: String
+}
+
+"""@model(find:false, findOne:false)"""
+type Feedback {
+  _id: GraphbackObjectID
+  created_at: GraphbackDateTime!
+  type: String!
+  description: String!
+}
+
+input FeedbackSubscriptionFilter {
+  and: [FeedbackSubscriptionFilter!]
+  or: [FeedbackSubscriptionFilter!]
+  not: FeedbackSubscriptionFilter
+  _id: GraphbackObjectIDInput
+  created_at: GraphbackDateTimeInput
+  type: StringInput
+  description: StringInput
 }
 
 scalar GraphbackDateTime
@@ -100,6 +125,13 @@ input MutateDateTimeInput {
   time: String
 }
 
+input MutateFeedbackInput {
+  _id: GraphbackObjectID
+  created_at: GraphbackDateTime
+  type: String
+  description: String
+}
+
 input MutateRegionInput {
   latitude: Float
   longitude: Float
@@ -127,7 +159,10 @@ type Mutation {
   createUserOrSignIn(id_token: String!): User
   createTheft(input: CreateTheftInput!): Theft
   deleteTheft(input: MutateTheftInput!): Theft
+  createFeedback(input: CreateFeedbackInput!): Feedback
   updateTheft(input: MutateTheftInput!): Theft
+  updateFeedback(input: MutateFeedbackInput!): Feedback
+  deleteFeedback(input: MutateFeedbackInput!): Feedback
   createUser(input: CreateUserInput!): User
   updateUser(input: MutateUserInput!): User
   deleteUser(input: MutateUserInput!): User
@@ -178,6 +213,9 @@ type Subscription {
   newTheft(filter: TheftSubscriptionFilter): Theft!
   updatedTheft(filter: TheftSubscriptionFilter): Theft!
   deletedTheft(filter: TheftSubscriptionFilter): Theft!
+  newFeedback(filter: FeedbackSubscriptionFilter): Feedback!
+  updatedFeedback(filter: FeedbackSubscriptionFilter): Feedback!
+  deletedFeedback(filter: FeedbackSubscriptionFilter): Feedback!
   newUser(filter: UserSubscriptionFilter): User!
   updatedUser(filter: UserSubscriptionFilter): User!
   deletedUser(filter: UserSubscriptionFilter): User!

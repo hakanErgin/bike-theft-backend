@@ -97,6 +97,21 @@ export const customResolvers: IResolvers = {
         } else return Error('User doesnt exist');
       } else return Error('user token not verified ');
     },
+    createFeedback: async (
+      parent: any,
+      args: any,
+      context: GraphQLContext,
+      info: GraphQLResolveInfo
+    ) => {
+      return await context.graphback.Feedback.create(
+        {
+          ...args,
+          created_at: new Date(),
+        },
+        context,
+        info
+      );
+    },
   },
   Query: {
     getUsersReportedThefts: async (
