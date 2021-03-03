@@ -7,27 +7,27 @@ directive @specifiedBy(
 ) on SCALAR
 
 type Bike {
-  type: String
-  brand: String
-  color: String
+  type: String!
+  brand: String!
+  color: String!
   year: String
   frame_size: String
   wheel_size: String
-  photos: [String]
+  photos: [String]!
 }
 
 input CreateBikeInput {
-  type: String
-  brand: String
-  color: String
+  type: String!
+  brand: String!
+  color: String!
   year: String
   frame_size: String
   wheel_size: String
-  photos: [String]
+  photos: [String]!
 }
 
 input CreateDateTimeInput {
-  date: GraphbackDateTime
+  date: GraphbackDateTime!
   time: String
 }
 
@@ -48,21 +48,21 @@ input CreateRegionInput {
 input CreateTheftInput {
   _id: GraphbackObjectID
   region: CreateRegionInput!
-  bike: CreateBikeInput
+  bike: CreateBikeInput!
   comments: String
-  date_time: CreateDateTimeInput
-  created_at: GraphbackDateTime
+  date_time: CreateDateTimeInput!
+  created_at: GraphbackDateTime!
   userId: GraphbackObjectID
 }
 
 input CreateUserInput {
   _id: GraphbackObjectID
-  google_id: String
-  google_name: String
+  google_id: String!
+  google_name: String!
 }
 
 type DateTime {
-  date: GraphbackDateTime
+  date: GraphbackDateTime!
   time: String
 }
 
@@ -225,10 +225,10 @@ type Subscription {
 type Theft {
   _id: GraphbackObjectID
   region: Region!
-  bike: Bike
+  bike: Bike!
   comments: String
-  date_time: DateTime
-  created_at: GraphbackDateTime
+  date_time: DateTime!
+  created_at: GraphbackDateTime!
   userId: GraphbackObjectID
 
   """@manyToOne(field: 'thefts', key: 'userId')"""
@@ -265,8 +265,8 @@ input TheftSubscriptionFilter {
 """@model(find:false, findOne:false)"""
 type User {
   _id: GraphbackObjectID
-  google_id: String
-  google_name: String
+  google_id: String!
+  google_name: String!
 
   """
   @oneToMany(field: 'user', key: 'userId')

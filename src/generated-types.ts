@@ -14,27 +14,27 @@ export type Scalars = {
 
 export type Bike = {
   __typename?: 'Bike';
-  type?: Maybe<Scalars['String']>;
-  brand?: Maybe<Scalars['String']>;
-  color?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
+  brand: Scalars['String'];
+  color: Scalars['String'];
   year?: Maybe<Scalars['String']>;
   frame_size?: Maybe<Scalars['String']>;
   wheel_size?: Maybe<Scalars['String']>;
-  photos?: Maybe<Array<Maybe<Scalars['String']>>>;
+  photos: Array<Maybe<Scalars['String']>>;
 };
 
 export type CreateBikeInput = {
-  type?: Maybe<Scalars['String']>;
-  brand?: Maybe<Scalars['String']>;
-  color?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
+  brand: Scalars['String'];
+  color: Scalars['String'];
   year?: Maybe<Scalars['String']>;
   frame_size?: Maybe<Scalars['String']>;
   wheel_size?: Maybe<Scalars['String']>;
-  photos?: Maybe<Array<Maybe<Scalars['String']>>>;
+  photos: Array<Maybe<Scalars['String']>>;
 };
 
 export type CreateDateTimeInput = {
-  date?: Maybe<Scalars['GraphbackDateTime']>;
+  date: Scalars['GraphbackDateTime'];
   time?: Maybe<Scalars['String']>;
 };
 
@@ -55,22 +55,22 @@ export type CreateRegionInput = {
 export type CreateTheftInput = {
   _id?: Maybe<Scalars['GraphbackObjectID']>;
   region: CreateRegionInput;
-  bike?: Maybe<CreateBikeInput>;
+  bike: CreateBikeInput;
   comments?: Maybe<Scalars['String']>;
-  date_time?: Maybe<CreateDateTimeInput>;
-  created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  date_time: CreateDateTimeInput;
+  created_at: Scalars['GraphbackDateTime'];
   userId?: Maybe<Scalars['GraphbackObjectID']>;
 };
 
 export type CreateUserInput = {
   _id?: Maybe<Scalars['GraphbackObjectID']>;
-  google_id?: Maybe<Scalars['String']>;
-  google_name?: Maybe<Scalars['String']>;
+  google_id: Scalars['String'];
+  google_name: Scalars['String'];
 };
 
 export type DateTime = {
   __typename?: 'DateTime';
-  date?: Maybe<Scalars['GraphbackDateTime']>;
+  date: Scalars['GraphbackDateTime'];
   time?: Maybe<Scalars['String']>;
 };
 
@@ -349,10 +349,10 @@ export type Theft = {
   __typename?: 'Theft';
   _id?: Maybe<Scalars['GraphbackObjectID']>;
   region: Region;
-  bike?: Maybe<Bike>;
+  bike: Bike;
   comments?: Maybe<Scalars['String']>;
-  date_time?: Maybe<DateTime>;
-  created_at?: Maybe<Scalars['GraphbackDateTime']>;
+  date_time: DateTime;
+  created_at: Scalars['GraphbackDateTime'];
   userId?: Maybe<Scalars['GraphbackObjectID']>;
   /** @manyToOne(field: 'thefts', key: 'userId') */
   user?: Maybe<User>;
@@ -390,8 +390,8 @@ export type TheftSubscriptionFilter = {
 export type User = {
   __typename?: 'User';
   _id?: Maybe<Scalars['GraphbackObjectID']>;
-  google_id?: Maybe<Scalars['String']>;
-  google_name?: Maybe<Scalars['String']>;
+  google_id: Scalars['String'];
+  google_name: Scalars['String'];
   /**
    * @oneToMany(field: 'user', key: 'userId')
    * @oneToMany(field: 'user')

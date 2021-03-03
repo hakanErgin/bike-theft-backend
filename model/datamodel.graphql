@@ -5,10 +5,10 @@
 type Theft {
   _id: GraphbackObjectID
   region: Region!
-  bike: Bike
+  bike: Bike!
   comments: String
-  date_time: DateTime
-  created_at: GraphbackDateTime
+  date_time: DateTime!
+  created_at: GraphbackDateTime!
   userId: GraphbackObjectID
 }
 type Region {
@@ -18,16 +18,16 @@ type Region {
   longitudeDelta: Float
 }
 type Bike {
-  type: String
-  brand: String
-  color: String
+  type: String!
+  brand: String!
+  color: String!
   year: String
   frame_size: String
   wheel_size: String
-  photos: [String]
+  photos: [String]!
 }
 type DateTime {
-  date: GraphbackDateTime
+  date: GraphbackDateTime!
   time: String
 }
 """
@@ -44,8 +44,8 @@ type Feedback {
 """
 type User {
   _id: GraphbackObjectID
-  google_id: String
-  google_name: String
+  google_id: String!
+  google_name: String!
   """
   @oneToMany(field: 'user')
   """
@@ -73,25 +73,25 @@ input RegionInput {
   longitudeDelta: Float
 }
 input BikeInput {
-  type: String
-  brand: String
-  color: String
+  type: String!
+  brand: String!
+  color: String!
   year: String
   frame_size: String
   wheel_size: String
-  photos: [String]
+  photos: [String]!
 }
 input DateTimeInput {
-  date: GraphbackDateTime
+  date: GraphbackDateTime!
   time: String
 }
 input CreateTheftInput {
   _id: GraphbackObjectID
   region: RegionInput!
-  bike: BikeInput
+  bike: BikeInput!
   comments: String
-  date_time: DateTimeInput
-  created_at: GraphbackDateTime
+  date_time: DateTimeInput!
+  created_at: GraphbackDateTime!
   userId: GraphbackObjectID
 }
 
