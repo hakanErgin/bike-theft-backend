@@ -21,6 +21,7 @@ export type Bike = {
   frame_size?: Maybe<Scalars['String']>;
   wheel_size?: Maybe<Scalars['String']>;
   photos: Array<Maybe<Scalars['String']>>;
+  ebike: Scalars['Boolean'];
 };
 
 export type CreateBikeInput = {
@@ -31,6 +32,7 @@ export type CreateBikeInput = {
   frame_size?: Maybe<Scalars['String']>;
   wheel_size?: Maybe<Scalars['String']>;
   photos: Array<Maybe<Scalars['String']>>;
+  ebike: Scalars['Boolean'];
 };
 
 export type CreateDateTimeInput = {
@@ -125,6 +127,7 @@ export type MutateBikeInput = {
   frame_size?: Maybe<Scalars['String']>;
   wheel_size?: Maybe<Scalars['String']>;
   photos?: Maybe<Array<Maybe<Scalars['String']>>>;
+  ebike?: Maybe<Scalars['Boolean']>;
 };
 
 export type MutateDateTimeInput = {

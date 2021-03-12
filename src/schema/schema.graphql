@@ -14,6 +14,7 @@ type Bike {
   frame_size: String
   wheel_size: String
   photos: [String]!
+  ebike: Boolean!
 }
 
 input CreateBikeInput {
@@ -24,6 +25,7 @@ input CreateBikeInput {
   frame_size: String
   wheel_size: String
   photos: [String]!
+  ebike: Boolean!
 }
 
 input CreateDateTimeInput {
@@ -118,6 +120,7 @@ input MutateBikeInput {
   frame_size: String
   wheel_size: String
   photos: [String]
+  ebike: Boolean
 }
 
 input MutateDateTimeInput {
