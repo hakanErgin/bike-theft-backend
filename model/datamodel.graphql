@@ -25,6 +25,7 @@ type Bike {
   frame_size: String
   wheel_size: String
   photos: [String]!
+  ebike: Boolean!
 }
 type DateTime {
   date: GraphbackDateTime!
@@ -80,6 +81,7 @@ input BikeInput {
   frame_size: String
   wheel_size: String
   photos: [String]!
+  ebike: Boolean!
 }
 input DateTimeInput {
   date: GraphbackDateTime!
