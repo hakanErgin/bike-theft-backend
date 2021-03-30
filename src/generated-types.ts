@@ -59,6 +59,7 @@ export type CreateTheftInput = {
   region: CreateRegionInput;
   bike: CreateBikeInput;
   comments?: Maybe<Scalars['String']>;
+  contact?: Maybe<Scalars['String']>;
   date_time: CreateDateTimeInput;
   created_at: Scalars['GraphbackDateTime'];
   userId?: Maybe<Scalars['GraphbackObjectID']>;
@@ -154,6 +155,7 @@ export type MutateTheftInput = {
   region?: Maybe<MutateRegionInput>;
   bike?: Maybe<MutateBikeInput>;
   comments?: Maybe<Scalars['String']>;
+  contact?: Maybe<Scalars['String']>;
   date_time?: Maybe<MutateDateTimeInput>;
   created_at?: Maybe<Scalars['GraphbackDateTime']>;
   userId?: Maybe<Scalars['GraphbackObjectID']>;
@@ -354,6 +356,7 @@ export type Theft = {
   region: Region;
   bike: Bike;
   comments?: Maybe<Scalars['String']>;
+  contact?: Maybe<Scalars['String']>;
   date_time: DateTime;
   created_at: Scalars['GraphbackDateTime'];
   userId?: Maybe<Scalars['GraphbackObjectID']>;
@@ -364,6 +367,7 @@ export type Theft = {
 export type TheftFilter = {
   _id?: Maybe<GraphbackObjectIdInput>;
   comments?: Maybe<StringInput>;
+  contact?: Maybe<StringInput>;
   created_at?: Maybe<GraphbackDateTimeInput>;
   userId?: Maybe<GraphbackObjectIdInput>;
   and?: Maybe<Array<TheftFilter>>;
@@ -385,6 +389,7 @@ export type TheftSubscriptionFilter = {
   not?: Maybe<TheftSubscriptionFilter>;
   _id?: Maybe<GraphbackObjectIdInput>;
   comments?: Maybe<StringInput>;
+  contact?: Maybe<StringInput>;
   created_at?: Maybe<GraphbackDateTimeInput>;
   userId?: Maybe<GraphbackObjectIdInput>;
 };

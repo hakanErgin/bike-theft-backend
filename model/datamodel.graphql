@@ -7,6 +7,7 @@ type Theft {
   region: Region!
   bike: Bike!
   comments: String
+  contact: String
   date_time: DateTime!
   created_at: GraphbackDateTime!
   userId: GraphbackObjectID
@@ -92,6 +93,7 @@ input CreateTheftInput {
   region: RegionInput!
   bike: BikeInput!
   comments: String
+  contact: String
   date_time: DateTimeInput!
   created_at: GraphbackDateTime!
   userId: GraphbackObjectID
