@@ -11,16 +11,18 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch(
-        console.error
-      );
+      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+        console.log(error);
+      });
       if (userVerifiedByToken) {
         const { google_id, google_name } = userVerifiedByToken;
         const userInDb = await context.graphback.User.findOne(
           { google_id },
           context,
           info
-        ).catch(console.error);
+        ).catch((error) => {
+          console.log(error);
+        });
         if (!userInDb) {
           console.log('attempting to create user');
           await context.graphback.User.create(
@@ -29,7 +31,9 @@ export const customResolvers: IResolvers = {
             info
           )
             .then((res) => console.log('user created'))
-            .catch(console.error);
+            .catch((error) => {
+              console.log(error);
+            });
         }
         return userVerifiedByToken;
       } else return Error('user token not verified ');
@@ -40,16 +44,18 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch(
-        console.error
-      );
+      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+        console.log(error);
+      });
       if (userVerifiedByToken) {
         const { google_id, google_name } = userVerifiedByToken;
         const userInDb = await context.graphback.User.findOne(
           { google_id },
           context,
           info
-        ).catch(console.error);
+        ).catch((error) => {
+          console.log(error);
+        });
         const newTheft =
           userInDb &&
           (await context.graphback.Theft.create(
@@ -69,16 +75,18 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch(
-        console.error
-      );
+      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+        console.log(error);
+      });
       if (userVerifiedByToken) {
         const { google_id, google_name } = userVerifiedByToken;
         const userInDb = await context.graphback.User.findOne(
           { google_id },
           context,
           info
-        ).catch(console.error);
+        ).catch((error) => {
+          console.log(error);
+        });
         if (userInDb) {
           const userIdInDB = userInDb._id?.toString();
           const userIdInArgs = args.theftUserId?.toString();
@@ -90,7 +98,9 @@ export const customResolvers: IResolvers = {
               },
               context,
               info
-            ).catch(console.error);
+            ).catch((error) => {
+              console.log(error);
+            });
             console.log({ deletedTheftResult });
             return deletedTheftResult;
           } else return Error('You dont have rights for that');
@@ -120,16 +130,18 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch(
-        console.error
-      );
+      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+        console.log(error);
+      });
       if (userVerifiedByToken) {
         const { google_id, google_name } = userVerifiedByToken;
         const userInDb = await context.graphback.User.findOne(
           { google_id },
           context,
           info
-        ).catch(console.error);
+        ).catch((error) => {
+          console.log(error);
+        });
         if (userInDb) {
           const filter = {
             userId: { eq: userInDb._id },
