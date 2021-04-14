@@ -2,6 +2,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { IResolvers } from 'apollo-server-express';
 import { GraphQLContext } from './custom-context';
 import verify from './auth-verifier';
+import jwt from 'jsonwebtoken';
 
 export const customResolvers: IResolvers = {
   Mutation: {
@@ -38,7 +39,10 @@ export const customResolvers: IResolvers = {
               console.log(error);
             });
         }
-        // userVerifiedByToken.token = jwt.sign();
+        userVerifiedByToken.token = jwt.sign(
+          { google_name },
+          context.secrets.JWT_SECRET
+        );
         return userVerifiedByToken;
       } else return Error('user token not verified ');
     },
