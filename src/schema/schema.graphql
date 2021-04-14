@@ -62,6 +62,7 @@ input CreateUserInput {
   _id: GraphbackObjectID
   google_id: String!
   google_name: String!
+  token: String
 }
 
 type DateTime {
@@ -158,6 +159,7 @@ input MutateUserInput {
   _id: GraphbackObjectID
   google_id: String
   google_name: String
+  token: String
 }
 
 type Mutation {
@@ -275,6 +277,7 @@ type User {
   _id: GraphbackObjectID
   google_id: String!
   google_name: String!
+  token: String
 
   """
   @oneToMany(field: 'user', key: 'userId')
@@ -290,4 +293,5 @@ input UserSubscriptionFilter {
   _id: GraphbackObjectIDInput
   google_id: StringInput
   google_name: StringInput
+  token: StringInput
 }

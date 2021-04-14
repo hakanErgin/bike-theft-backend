@@ -69,6 +69,7 @@ export type CreateUserInput = {
   _id?: Maybe<Scalars['GraphbackObjectID']>;
   google_id: Scalars['String'];
   google_name: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
 };
 
 export type DateTime = {
@@ -165,6 +166,7 @@ export type MutateUserInput = {
   _id?: Maybe<Scalars['GraphbackObjectID']>;
   google_id?: Maybe<Scalars['String']>;
   google_name?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -400,6 +402,7 @@ export type User = {
   _id?: Maybe<Scalars['GraphbackObjectID']>;
   google_id: Scalars['String'];
   google_name: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
   /**
    * @oneToMany(field: 'user', key: 'userId')
    * @oneToMany(field: 'user')
@@ -420,4 +423,5 @@ export type UserSubscriptionFilter = {
   _id?: Maybe<GraphbackObjectIdInput>;
   google_id?: Maybe<StringInput>;
   google_name?: Maybe<StringInput>;
+  token?: Maybe<StringInput>;
 };

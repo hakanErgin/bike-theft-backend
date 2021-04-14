@@ -48,6 +48,7 @@ type User {
   _id: GraphbackObjectID
   google_id: String!
   google_name: String!
+  token: String
   """
   @oneToMany(field: 'user')
   """
