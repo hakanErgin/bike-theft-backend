@@ -8,7 +8,7 @@ import http from 'http';
 import { loadConfigSync } from 'graphql-config';
 import { connectDB } from './db';
 import { customResolvers } from './custom-resolvers';
-
+import getSecrets from './googleSecret';
 const port = process.env.PORT;
 
 async function start() {
@@ -29,8 +29,15 @@ async function start() {
   const graphbackConfig = projectConfig.extension(graphbackExtension);
 
   const modelDefs = projectConfig.loadSchemaSync(graphbackConfig.model);
-
-  const db = await connectDB();
+  const {
+    DB_USER,
+    DB_PASSWORD,
+    DB_HOST,
+    DB_DATABASE,
+    CLIENT_ID,
+    JWT_SECRET,
+  } = await getSecrets();
+  const db = await connectDB(DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE);
 
   const { typeDefs, resolvers, contextCreator } = buildGraphbackAPI(modelDefs, {
     dataProviderCreator: createMongoDbProvider(db),
@@ -44,10 +51,20 @@ async function start() {
     },
   });
 
+  function buildContext({ req, res }: any) {
+    const graphBackContext = contextCreator();
+    const context = {
+      req,
+      res,
+      ...graphBackContext,
+      secrets: { CLIENT_ID, JWT_SECRET },
+    };
+    return context;
+  }
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers: [resolvers, customResolvers],
-    context: contextCreator,
+    context: buildContext,
   });
 
   apolloServer.applyMiddleware({ app });

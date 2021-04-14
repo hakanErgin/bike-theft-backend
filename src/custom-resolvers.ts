@@ -11,7 +11,10 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+      const userVerifiedByToken = await verify(
+        args.id_token,
+        context.secrets.CLIENT_ID
+      ).catch((error) => {
         console.log(error);
       });
       if (userVerifiedByToken) {
@@ -35,6 +38,7 @@ export const customResolvers: IResolvers = {
               console.log(error);
             });
         }
+        // userVerifiedByToken.token = jwt.sign();
         return userVerifiedByToken;
       } else return Error('user token not verified ');
     },
@@ -44,7 +48,10 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+      const userVerifiedByToken = await verify(
+        args.id_token,
+        context.secrets.CLIENT_ID
+      ).catch((error) => {
         console.log(error);
       });
       if (userVerifiedByToken) {
@@ -75,7 +82,10 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+      const userVerifiedByToken = await verify(
+        args.id_token,
+        context.secrets.CLIENT_ID
+      ).catch((error) => {
         console.log(error);
       });
       if (userVerifiedByToken) {
@@ -130,7 +140,10 @@ export const customResolvers: IResolvers = {
       context: GraphQLContext,
       info: GraphQLResolveInfo
     ) => {
-      const userVerifiedByToken = await verify(args.id_token).catch((error) => {
+      const userVerifiedByToken = await verify(
+        args.id_token,
+        context.secrets.CLIENT_ID
+      ).catch((error) => {
         console.log(error);
       });
       if (userVerifiedByToken) {

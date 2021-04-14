@@ -1,15 +1,13 @@
 const { OAuth2Client } = require('google-auth-library');
 import getSecrets from './googleSecret';
 
-async function getClient() {
-  const DBsecrets = await getSecrets();
-  const { CLIENT_ID } = DBsecrets;
+async function getClient(CLIENT_ID: string) {
   const client = new OAuth2Client(CLIENT_ID);
-  return { client, CLIENT_ID };
+  return client;
 }
 
-export default async function verify(id_token: any) {
-  const { client, CLIENT_ID } = await getClient();
+export default async function verify(id_token: string, CLIENT_ID: string) {
+  const client = await getClient(CLIENT_ID);
   const ticket = await client.verifyIdToken({
     idToken: id_token,
     audience: CLIENT_ID,

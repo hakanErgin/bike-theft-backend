@@ -1,18 +1,11 @@
 import { MongoClient } from 'mongodb';
-import getSecrets from './googleSecret';
 
-type DBSecrets = {
-  DB_USER: string;
-  DB_PASSWORD: string;
-  DB_HOST: string;
-  DB_DATABASE: string;
-};
-
-export async function connectDB() {
-  const DBsecrets: DBSecrets = await getSecrets();
-
-  const { DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE } = DBsecrets;
-
+export async function connectDB(
+  DB_USER: string,
+  DB_PASSWORD: string,
+  DB_HOST: string,
+  DB_DATABASE: string
+) {
   let url = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}?retryWrites=true&w=majority`;
 
   const mongoClient = await MongoClient.connect(url, {

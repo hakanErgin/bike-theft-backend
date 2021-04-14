@@ -10,4 +10,5 @@ export interface GraphQLContext extends GraphbackContext {
     Theft: GraphbackCRUDService<Theft>;
     Feedback: GraphbackCRUDService<Feedback>;
   };
+  secrets: { CLIENT_ID: string; JWT_SECRET: string };
 }
